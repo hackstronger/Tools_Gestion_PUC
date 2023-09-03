@@ -1,0 +1,178 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools Gestion PUC</title>
+    <link href="style.css" rel="stylesheet">
+    <script src="codeCrono.js"></script>
+</head>
+<body>
+    
+  <div class="container">
+      <div class="Header"><!-- Header -->
+            <h2>Tools Gestion</h2>  
+          <div class="wrap">
+              <button class="tab" id="tab1">Gestion</button>
+              <button class="tab" id="tab1">Plantillas</button>
+              <button class="tab" id="tab1">Ayuda</button>
+          </div><!-- wrap -->
+      </div><!-- Header -->
+  
+  <div class="ContentTap" id="tab0Content"><!-- ContentTap -->
+      <div class="wrapper">
+          <div class="wrap left">
+                <form>
+                  <div id="inputForm"></div>
+                  <button type="reset">Limpiar inputs</button>
+                </form>
+                <button id="genInp">Generar Input</button>
+                <button id="delDemo">Borrar Inputs</button>
+                <br><br>
+                <button id="updData">Actulizar Celda</button>
+                <button type="button" class="btn btn-danger" id="agreFil">Agregar Fila</button>
+                <button type="button" class="btn btn-danger" id="erasFil">Eliminar Ultima Fila</button>
+                <button type="button" class="btn btn-danger" id="erasSelec">Eliminar Selección</button>
+          </div><!-- wrap -->
+      
+     <!--     <div class="wrap">
+                    
+          </div><!-- wrap -->
+          
+          <div class="wrap right">
+                <div class="botones">
+                  <button id="copyBtn">Add</button>
+                  <button id="clearBtn">Clear</button>
+                  <button id="clearAllBtn">Clear All</button>
+                </div>
+                <br>
+                <select id="selectSr">
+                  <option value="el Sr">Sr</option>
+                  <option value="la Sra">Sra</option>
+                </select>
+                <select id="selectNov">
+                  <option value="DATOS">Datos</option>
+                  <option value="SEÑAL">Señal</option>
+                  <option value="VOZ">Voz</option>
+                </select>
+                <br><br>
+                <label for="textFieldBSC">BSC Ticket No.</label>
+                <input type="text" id="textFieldBSC" placeholder="Buscar texto...">
+                <button id="reset">Restaurar</button>
+                <div id="reposDiv"></div>
+          </div><!-- wrap -->
+      </div><!-- wrapper -->
+         
+          <div class="wrap">
+                      <input type="file" accept=".csv" id="inputFile">
+                      <select id="separator">
+                        <option value=";">( ; )</option>
+                        <option value=",">( , )</option>
+                      </select>
+
+                      <button id="loadTable">Cargar Tabla</button>
+                      <button id="exportTableToCSV">Export To CSV</button>
+                      <button id="erasTabl">Borrar tabla</button>
+          </div><!-- wrap -->
+
+          <div class="wrap">
+              <p>Hay <span id="countCheck">0</span> casos gestionados.</p>
+              Ingrese datos: <input type="text" id="searchInput" placeholder="Buscar texto..."/>
+                  <button id="borrar">Borrar búsqueda</button>
+                  <br>
+                  <select id="selectColor">
+                    <option value="0">Default</option> <!-- disabled -->
+                    <option value="1">Sweep</option>
+                    <option value="2">Process</option>
+                  </select>
+                  <button id="seleccionar">Seleccionar todo</button>
+                  <button id="deseleccionar">Deseleccionar todo</button>
+                  <button id="ocultar">Ocultar</button>
+          </div><!-- wrap -->  
+
+          <div class="wrap">        
+                <div id="dataTable"><!-- Contenido tabla --></div>
+          </div><!-- wrap -->
+    </div><!-- ContentTap -->
+            
+
+    <div class="ContentTap" id="tab1Content"><!-- tab1Content -->
+                      <br/>
+                      <form>
+                      <label for="select1A">Seleccione Plantilla:</label>
+                      <select id="select1A">
+                        <option value="" selected="selected">Seleccione una opción</option> <!-- disabled -->
+                        <option value="s1A.1">Procedente (Cerrado)</option>
+                        <option value="s1A.2">Improcedente (Devuelto)</option>
+                      </select>
+
+                      <select id="select1B" style="display:none"> 
+                      </select>
+
+                      <select id="select1C" style="display:none">
+                      </select>
+                      <span id="SelectSpan1" style="display:none"></span>
+                      <br>
+                      <label for="select2A">Proceso realizado:</label>
+                      <select id="select2A">
+                        <option value="s2A.1">Ninguno</option>
+                        <option value="s2A.2">Proceso</option>
+                      </select>
+                      <select id="selectOpt1A" style="display:none">
+                        <option value="">Seleccione una opción</option>
+                      </select>
+                      
+                      <br>
+                      <label for="selectOpt2">Servicio funcional SI/NO:</label>
+                      <select id="selectOpt2">
+                        <option value="s2opc1">n/a</option>
+                        <option value="s2opc2">No</option>
+                        <option value="s2opc3">Si</option>
+                      </select>
+                      <br>
+                      <label for="selectOpt3">Escalamiento:</label>
+                      <select id="selectOpt3">
+                        <option value="s3opc1">No aplica</option>
+                        <option value="s3opc2">Escalamiento</option>
+                      </select>
+                      <span id="spanOpt3" style="display:none"></span>
+
+                      <br>
+                      <button type="button" id="Generar">Generar</button>
+                      <button type="button" id="btnReset">Reset</button>
+                      </form>
+                      
+              <div class="form-grande">
+                <h2>Plantilla de cierre</h2>
+                <textarea id="textArea"></textarea>
+                <button type="button" id="copy">Copy</button> <button  type="reset" id="delet">Delet</button>
+              </div><!-- form-grande -->   
+    </div><!-- tab1Content -->
+
+    <div class="ContentTap" id="tab2Content"><!-- tab2Content -->
+base de conocimiento
+<br>Determinar Novedad
+<ul>
+<li>Desde cuando la presenta</li>
+<li>esta completamente sin servicio</li>
+<li> falla una aplicacion</li>
+<li>la falla es recurente y ocurre e un lugar u   horario en particular</li>
+</ul>    
+      <!--Tab 3 is probably the best of the three tabs.-->
+    </div><!-- tab2Content -->
+
+
+  <div class="Footer">
+      Created by hackstronger
+            <!-- ----------------------------------------
+            ------------ Content Text -------------------
+            ------------- <div id="tempTextarea"></div> --------------------------------
+            -->
+            <div id="contentGral">
+                
+            </div>
+      
+  </div><!-- Footer -->
+  
+</div><!-- container -->
+</body>
+</html>
