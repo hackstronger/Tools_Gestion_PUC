@@ -806,16 +806,10 @@ function formatTime(horas, minutos) {
 
 // ----- Franja Horaria Saludo -----
 function getSaludo() {
-    let horaActual = new Date().getHours();
-    let saludo;
-      if (horaActual < 12) {
-        saludo = "Buenos días";
-      } else if (horaActual < 18) {
-        saludo = "Buenas tardes";
-      } else {
-        saludo = "Buenas noches";
-      }
-      return saludo;    
+  const horaActual = new Date().getHours();
+  const saludo =
+    horaActual < 12 ? "Buenos días" : horaActual < 18 ? "Buenas tardes" : "Buenas noches";
+  return saludo;
 }
 // ---------------------------------
 function getCustomTexts() {
