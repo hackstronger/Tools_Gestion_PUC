@@ -10,10 +10,7 @@ const selectColor = document.getElementById('selectColor'); //Seleccion color
 
 // Contenidos
 const textArea = document.getElementById("textArea");
-const content1 = document.querySelector('#content1');
-const content2 = document.querySelector('#content2');
-const content3 = document.querySelector('#content3');
-const content4 = document.querySelector('#content4');
+
 // Botones
 const copyBtn = document.getElementById('copyBtn');
 const clearBtn = document.getElementById('clearBtn');
@@ -54,8 +51,8 @@ const selectOpt3 = document.getElementById('selectOpt3'); //Seleccion Servicio f
 const selectOpt1A = document.getElementById('selectOpt1A'); // proceso realizado
 const spanOpt3 = document.getElementById('spanOpt3'); // Textfield No. Caso
 // Selector Change 2
-select1.addEventListener("change", selectOption2);
-  function selectOption2 () {
+select1.addEventListener("change", selectOption1);
+  function selectOption1 () {
     select2.style.display = 'none';
     SelectSpan1.style.display = 'none';
     select2.innerHTML = '<option value="">Seleccione una opción</option>';
@@ -69,7 +66,7 @@ select1.addEventListener("change", selectOption2);
       select2.innerHTML += '<option value="s1B.1.3">Placa</option>';
       select2.innerHTML += '<option value="s1B.1.4">Consumos</option>';
       select2.innerHTML += '<option value="s1B.1.5">Sin cobertura</option>';
-      select2.innerHTML += '<option value="s1B.1.6">IMEI no compatible</option>';
+      select2.innerHTML += '<option value="s1B.1.6">Incompatibilidad (IMEI)</option>';
       select2.innerHTML += '<option value="s1B.1.7">Sin comprobante</option>';
 
     } else if (select1.value === 's1A.2') { //select 1 opcion 2
@@ -83,9 +80,9 @@ select1.addEventListener("change", selectOption2);
       select2.innerHTML += '<option value="s1B.2.8">Otros</option>';
     }
   };
-// Selector Change 3
-select2.addEventListener("change", selectOption3);
-  function selectOption3 () {
+// Selector Change 2
+select2.addEventListener("change", selectOption2);
+  function selectOption2 () {
     select3.style.display = 'none';
     SelectSpan1.style.display = 'none';
     select3.innerHTML = '<option value="">Seleccione una opción</option>';
@@ -98,18 +95,18 @@ select2.addEventListener("change", selectOption3);
       select3.innerHTML += '<option value="s1C.1.4">Misma linea Afectada</option>';
 			select3.innerHTML += '<option value="s1C.1.5">4G Sin direccion precisa</option>';
       select3.innerHTML += '<option value="s1C.1.6">Sin falla reportada</option>';
-    } else if (select2.value === 's1B.2.2') {
-      select3.style.display = 'inline-block';
-      select3.innerHTML += '<option value="s1C.2.1">Devuelto</option>';
-      select3.innerHTML += '<option value="s1C.2.2">Cerrado (CUN)</option>';
-    } else if (select2.value === 's1B.2.3') {
-      select3.style.display = 'inline-block';
-      select3.innerHTML += '<option value="s1C.3.1">Devuelto</option>';
-      select3.innerHTML += '<option value="s1C.3.2">Cerrado (CUN)</option>';
-      select3.innerHTML += '<option value="s1C.3.3">Bandas</option>';
+      select3.innerHTML += '<option value="s1C.1.7">Sin Primer nivel</option>';
+      select3.innerHTML += '<option value="s1C.1.8">Sin Nombre de contacto</option>';
+    } else if (select2.value === 's1B.1.6') { //incompatibilidad procedente
+      select3.style.display = 'inline-block'; 
+      select3.innerHTML += '<option value="s1C.3.2">Dispositivo (CUN)</option>';
       select3.innerHTML += '<option value="s1C.3.4">Bandas (CUN)</option>';
-    }	else if (select2.value === 's1B.2.4') {
-      select3.style.display = 'inline-block';
+    }	else if (select2.value === 's1B.2.3') { //incompatibilidad inprocedente
+      select3.style.display = 'inline-block'; 
+      select3.innerHTML += '<option value="s1C.3.1">Dispositivo</option>';
+      select3.innerHTML += '<option value="s1C.3.3">Bandas</option>';
+    }else if (select2.value === 's1B.2.4') {
+      select3.style.display = 'inline-block';// option bloqueo
       select3.innerHTML += '<option value="s1C.4.1">Unidireccional</option>';
       select3.innerHTML += '<option value="s1C.4.2">IMEI</option>';
       select3.innerHTML += '<option value="s1C.4.3">Sin saldo</option>';
@@ -118,23 +115,42 @@ select2.addEventListener("change", selectOption3);
       select3.innerHTML += '<option value="s1C.5.1">Numeros cortos</option>';
       select3.innerHTML += '<option value="s1C.5.2">Grupo Aval</option>';
       select3.innerHTML += '<option value="s1C.5.3">Falabella</option>';
-    } else if (select2.value === 's1B.2.8') {
+    } else if (select2.value === 's1B.2.6') {
+    SelectSpan1.style.display = 'inline-block';
+    SelectSpan1.innerHTML = `<label for="NovedPresent"Novedad: </label>
+      <input type="text" id="NovedPresent" placeholder="Novedad presentada">
+      <button type="button" id="clearNoved">Borrar</button>`;
+  	} else if (select2.value === 's1B.2.8') {
       select3.style.display = 'inline-block';
       select3.innerHTML += '<option value="s1C.8.1">Tipologia No Aplica</option>';
       select3.innerHTML += '<option value="s1C.8.2">Infraestructura</option>';
     } else if (select2.value === 's1B.1.1') {
-    SelectSpan1.style.display = 'inline-block';
-    SelectSpan1.innerHTML = `<label for="checkbox1">Buron de Voz</label>
+   		SelectSpan1.style.display = 'inline-block';
+    	SelectSpan1.innerHTML = `<label for="checkbox1">Buron de Voz</label>
       <input type="checkbox" id="checkbox1" checked>`;
-  } else if (select2.value === 's1B.1.2') {
-    select3.style.display = 'inline-block';
-    select3.innerHTML += '<option value="s1C.2.1">Contacto</option>';
-    select3.innerHTML += '<option value="s1C.2.2">Caida</option>';
-    select3.innerHTML += '<option value="s1C.2.3">Muda</option>';
-  } else if (select2.value === 's1B.1.3') { //No. Placa 
-    SelectSpan1.style.display = 'inline-block';
-    SelectSpan1.innerHTML = `<label for="namePlaque">No. Placa:</label>
-      <input type="text" id="namePlaque" required minlength="4" maxlength="42" size="10">
+  	} else if (select2.value === 's1B.1.2') {
+    	SelectSpan1.style.display = 'block';
+      SelectSpan1.innerHTML = `
+          <select id="selectPrueba">
+          	 <option value="selec1" selected>Contacto</option>
+             <option value="selec2">Caida</option>
+             <option value="selec3">Muda</option>
+          </select>
+          <label for="S3checkbox1">Restablecimiento de redes</label>
+          <input type="checkbox" id="S3checkbox1">
+          <label for="S3checkbox2">Escaneo de redes</label>
+          <input type="checkbox" id="S3checkbox2"><br>
+          <textarea id="textArea3" rows="2" cols="42"></textarea>
+          <button type="button" id="clearButtonCont">Borrar</button>
+        `;
+  	} 
+    //else if (select2.value === 's1B.1.4') { //Consumos Seleccionado
+    	//selectOpt2.selectedIndex = 2;
+  	//} 
+    	else if (select2.value === 's1B.1.3') { //No. Placa 
+    	SelectSpan1.style.display = 'inline-block';
+    	SelectSpan1.innerHTML = `<label for="namePlaque">No. Placa:</label>
+      <input type="text" id="namePlaque" placeholder="No. de placa" required minlength="4" maxlength="72" size="10">
       <button type="button" id="clearPlaque">Borrar</button>`;			
     // Agregar el evento click al botón dentro de la función
     const clearPlaque = document.querySelector('#clearPlaque'); 
@@ -142,20 +158,88 @@ select2.addEventListener("change", selectOption3);
     clearPlaque.addEventListener('click', () => {
     namePlaque.value = ''; // Borrar el texto del input text
     });
-  }
-  };
-  
+  } 
+};
+
 // Selector Change selectOpt1Fun
 selectOpt1.addEventListener("change", selectOpt1Fun);
   function selectOpt1Fun () {
-    selectOpt1A.style.display = 'none';
-    selectOpt1A.innerHTML = '<option value="">Seleccione una opción</option>';
+    spanOpt2.style.display = 'none';
+    
+    if (selectOpt1.value === 's2A.2') {
+        spanOpt2.style.display = 'block';
+        spanOpt2.innerHTML = `
+          <label for="S2checkbox1">Restablecimiento de redes</label>
+          <input type="checkbox" id="S2checkbox1">
+          <label for="S2checkbox2">Escaneo de redes</label>
+          <input type="checkbox" id="S2checkbox2">
+          <label for="S2checkbox3">Configuración de APN</label>
+          <input type="checkbox" id="S2checkbox3"><br>
+          <label for="S2checkbox4">Configuración de Roaming</label>
+          <input type="checkbox" id="S2checkbox4">
+          <label for="S2checkbox5">Configuración de Roaming</label>
+          <input type="checkbox" id="S2checkbox5">
+          <label for="checkbox6">Desactivación llamadas volte</label>
+          <input type="checkbox" id="S2checkbox6"><br>          
+          <label for="checkbox7">Prueba cruzada</label>
+          <input type="checkbox" id="S2checkbox7"> 
+          <label for="checkbox8">Cliente no desea soporte</label>
+          <input type="checkbox" id="S2checkbox8">
+          <label for="checkbox9">Novedad solucionada</label>
+          <input type="checkbox" id="S2checkbox9"><br>
+          <textarea id="textArea2" rows="2" cols="42"></textarea>
+          <button type="button" id="clearButtonProc">Borrar</button>
+        `;
 
-    if (selectOpt1.value === 's1opc2') {
-			selectOpt1A.style.display = 'inline-block';
-      selectOpt1A.innerHTML += '<option value="2.2.1">Opción 2.2.1</option>';
-      selectOpt1A.innerHTML += '<option value="2.2.2">Opción 2.2.2</option>';					
-    } 
+        const clearButtonProc = document.getElementById('clearButtonProc');
+        const checkboxes = [S2checkbox1, S2checkbox2, S2checkbox3, S2checkbox4, S2checkbox5, S2checkbox6, S2checkbox7];
+       // const textArea2 = document.getElementById('textArea2');
+
+        clearButtonProc.addEventListener('click', () => {
+          textArea2.value = '';
+          checkboxes.forEach(checkbox => {
+            checkbox.checked = false;
+            checkbox.disabled = false;
+            S2checkbox8.checked = false;
+            S2checkbox9.checked = false;
+            S2checkbox8.disabled = false;
+            S2checkbox9.disabled = false;
+          });
+        });
+
+        checkboxes.forEach(checkbox => {
+          checkbox.addEventListener('change', () => {
+             const selectedValues = checkboxes.filter(checkbox => checkbox.checked).map(checkbox => checkbox.previousElementSibling.textContent);
+          textArea2.value = selectedValues.join(', '); // Cambiar el separador según tus necesidades
+          });
+        });
+        
+        S2checkbox8.addEventListener('change', () => {
+        		S2checkbox8Txt = "Cliente no desea soporte";
+            S2checkbox8.checked === true ? checkboxDisable(S2checkbox8Txt,S2checkbox9) : checkboxUndisable(S2checkbox9) ;// Validacion celda vacia  
+        });
+        
+        S2checkbox9.addEventListener('change', () => {
+        		S2checkbox9Txt = "Novedad solucionada";
+            S2checkbox9.checked === true ? checkboxDisable(S2checkbox9Txt,S2checkbox8) : checkboxUndisable(S2checkbox8) ;// Validacion celda vacia  
+        });
+        
+        function checkboxDisable(textArea2Txt,n) {
+        		checkboxes.forEach(checkbox => {
+           		checkbox.disabled = true;
+          });
+          n.disabled = true;
+          textArea2.value = textArea2Txt;
+        }
+        
+        function checkboxUndisable(n) {
+        		checkboxes.forEach(checkbox => {
+           		checkbox.disabled = false;
+          });	
+          n.disabled = false;
+          textArea2.value = "";
+        }
+      } 
   };  
   
 // Selector Change selectOpt3Fun
@@ -167,7 +251,7 @@ function selectOpt3Fun() {
   if (selectOpt3.value === 's3opc2') {
     spanOpt3.style.display = 'inline-block';
     spanOpt3.innerHTML = `<label for="numeCase">No. Caso: </label>
-      <input type="text" id="numeCase" name="name" required minlength="4" maxlength="21" size="10">
+      <input type="text" id="numeCase" placeholder="No. de caso" required minlength="4" maxlength="21" size="10">
       <button type="button" id="clearButton">Borrar</button>`;			
     // Agregar el evento click al botón dentro de la función
     const clearButton = document.getElementById('clearButton');
@@ -402,14 +486,10 @@ document.getElementById("ocultar").addEventListener('click', changeText);
 
 function changeText() {
   var button = document.getElementById("ocultar");
-  if (button.innerHTML === "Ocultar") {
-  	hideUncheckedRows();
-    button.innerHTML = "Mostrar";
-  } else {
-  	showAllRows();
-    button.innerHTML = "Ocultar";
-  }
+  	button.innerHTML = (button.innerHTML === "Ocultar") ? "Mostrar" : "Ocultar";
+  	(button.innerHTML === "Mostrar") ? hideUncheckedRows() : showAllRows();
 }
+
 
 function hideUncheckedRows() {
   var checkboxes = document.getElementsByClassName("checkbox");
@@ -748,6 +828,7 @@ btnReset.onclick = () => {
   selectOpt3.selectedIndex = 0; //Select Servicio funcional
   spanOpt3.style.display = 'none'; //Nu mero de caso Span
   SelectSpan1.style.display = 'none'; //checkbox Span
+  spanOpt2.style.display = 'none'; //checkbox Proceso
 };
 //-----------------------------------------------------
 
@@ -800,8 +881,6 @@ function formatTime(horas, minutos) {
   minutos = minutos < 10 ? '0' + minutos : minutos;
   return `${horas}:${minutos}${periodo}`;
 }
-
-
 // ---------------------------------
 
 // ----- Franja Horaria Saludo -----
@@ -812,54 +891,60 @@ function getSaludo() {
   return saludo;
 }
 // ---------------------------------
+
+// ---------------------------------
 function getCustomTexts() {
 		var horaRestadaObj = obtenerHoraRestada();
     var textInput4 = varTextField('textInput4'); //Numero de contacto
     var textInput5 = varTextField('textInput5'); // Fecha
-    var textInput6 = varTextField('textInput6')  // Numero de caso
-    var checkbox1 = varTextField('checkbox1')  // Checkbox Buzon de voz
-    var namePlaque = varTextField('namePlaque') //Numero de placa 
+    var textInput6 = varTextField('textInput6');  // Numero de caso
+    var checkbox1 = varTextField('checkbox1');  // Checkbox Buzon de voz
+    var namePlaque = varTextField('namePlaque'); //Numero de placa 
     
-    var checkBox1 =  checkbox1 === true ? `Se deja buzón de voz` : `No permite dejar buzón de voz`// Validacion celda vacia
-    var namePlaqueS =  namePlaque === "" ? `(numero de placa)` : namePlaque// Validacion celda vacia
+    var checkBox1 =  checkbox1 === true ? `Se deja buzón de voz` : `No permite dejar buzón de voz`;// Validacion celda vacia
+    var namePlaqueS =  namePlaque === "" ? `(numero de placa)` : namePlaque; // Validacion celda vacia
     let paqueSplit = namePlaqueS.split("\t"); //Numero de placa con tab
+		let textAreaProc = (typeof textArea2 === 'undefined') ? "No avaliable textArea2" : textArea2.value;   
    
-    const templat1 = `Debido a la falta de información detallada en las notas proporcionadas`; // primer aaprte de la plantilla
-    const templat2 = `por lo que  no fue posible completar el análisis y resolución del caso en el nivel de soporte al que fue escalado, por lo que es improcedente para el mismo.`; //segunda parte de la plantilla
+    const templat1 =`Debido a la falta de información detallada en las notas proporcionadas, no pudimos completar el análisis y resolución del caso en el nivel de soporte al que fue escalado.
+Para poder brindar la mejor asistencia posible, se requieren detalles claros`; // primer aaprte de la plantilla
+    const templat2 =`no pudimos completar el análisis y resolución del caso en el nivel de soporte al que fue escalado`; //segunda parte de la plantilla
     return {
-      "s2A.1": "Ninguno",
-      "s2A.2": "Configuración de equipo",
+      "s2A.1": `Ninguno`,
+      "s2A.2": `${textAreaProc}.`,
       s2opc1: "n/a",
       s2opc2: "No",
       s2opc3: "Si",
       s3opc1: "n/a",
       s3opc2: textInput6 === "" ? `Sin número de caso` : textInput6, 
-      "s1B.1.1": `Se realizan las correspondientes marcaciones a la línea ${textInput4} el dia ${horaRestadaObj.fechActual}. Hora inicio ${horaRestadaObj.hrsRstdaFormtda}, hora fin ${horaRestadaObj.hrsOgralFormtda}. Sin contacto efectivo. ${checkBox1}.`, //namePlaque
-      "s1B.1.2": `Se realiza comunicación a la línea ${textInput4}, este indica que la novedad reportada ya se encuentra  solucionada.`,
-      "s1B.1.3": `Se realiza cierre del caso por novedad masiva del servicio con placa ${paqueSplit[0]} dia ${(typeof paqueSplit[1] === "undefined") ? "(Fecha)" : paqueSplit[1]} hora ${(typeof paqueSplit[2] === "undefined") ? "(Hora)" : paqueSplit[2]}.`,
-     "s1B.1.4": `Se valida caso y se evidencian consumos desde antes y despues de haber generado el requerimiento.`,
+      "s1B.1.1": `se realizan las correspondientes marcaciones a la línea ${textInput4} el dia ${horaRestadaObj.fechActual}. Hora inicio ${horaRestadaObj.hrsRstdaFormtda}, hora fin ${horaRestadaObj.hrsOgralFormtda}. Sin contacto efectivo. ${checkBox1}.`, //namePlaque
+      "s1B.1.2":`se realiza comunicación a la línea ${textInput4}, este indica que la novedad reportada ya se encuentra  solucionada.`,
+      "s1B.1.3":`Se realiza cierre del caso por novedad masiva del servicio con placa ${paqueSplit[0]} dia ${(typeof paqueSplit[1] === "undefined") ? "(Fecha)" : paqueSplit[1]} hora ${(typeof paqueSplit[2] === "undefined") ? "(Hora)" : paqueSplit[2]}.`, //Placa incidente
+     "s1B.1.4":`se valida caso y se evidencian consumos desde antes y despues de haber generado el requerimiento.`,
      "s1B.1.5":`Se valida cobertura y se evidencia que no cuenta con la misma, según la ubicación brinda en el caso.`,
-     "s1B.1.6": `Se valida compatibilidad 4G y se evidencia que el equipo no es compatible.`,
-     "s1B.1.7":`Se valida caso y se evidencia que no hay comprobante de pago adjunto de la transaccion realizada, ya que para continuar con la solicitud se requiere del mismo.`,
-     "s1C.4.2": `Se valida el caso por intermitencia pero al consultar el IMEI se evidencia que se encuetra reportado con novedad de hurto/ robo, ${templat2}`,
-     "s1C.1.1": `${templat1}, ${templat2}`,
-     "s1C.1.2":`${templat1}, la linea afectada en el caso no existe en la base de Wom. INFORMACION ERRADA por parte del area que escala, ${templat2}`,
-     "s1C.1.3":`${templat1}, Se valida caso y se evidencia que no tiene linea alterna, ya que para este tipo de solicitud se requiere de la misma, ${templat2}`,
-     "s1C.1.4":`${templat1}, la línea desde la cual le estan llamando es la misma linea afectada, no es posible realizar una llamada al mismo numero, ${templat2}`,
-     "s1C.1.5":`${templat1}, no hay ubicación precisa para validar cobertura, ${templat2}`,
-     "s1C.1.6":`${templat1}, no hay descripcion detallada en la Falla reportada por el usuario, ${templat2}`,
-     "s1C.2.1":`Se valida cobertura y se evidencia que no cuenta con la misma, según la ubicación brinda en el caso, ${templat2}`,
-     "s1C.3.1":`Se valida compatibilidad 4G y se evidencia que el equipo no es compatible, ${templat2}`,
-     "s1C.3.3":`Se realiza validación sobre compatibilidad 4G de la linea en cuestion y se evidencia que este no es compatible con todas o algunas de las bandas 4G`,
-     "s1C.3.4":`Se realiza validación sobre compatibilidad 4G de la linea en cuestion y se evidencia que este no es compatible con todas o algunas de las bandas 4G, ${templat2}`,
-     "s1C.4.1": `Se valida si esta activa la linea indicada en el caso como afectada y se evidencia que tiene bloqueo en Ekia, ${templat2}`,
-     "s1C.4.3": `Se valida el caso ya que usuario no puede navegar, se validan billeteras y se evidencia que tiene agotado los recursos, ${templat2}`,
-     "s1C.5.1":`No hay convenio con números cortos, ${templat2}`,
-     "s1C.5.2":`No hay convenio con números del Grupo Aval, ${templat2}`,
-     "s1C.5.3":`No hay convenio con números de Falabella, ${templat2}`,
-     "s1B.2.6":`Segun novedad presentada no le ingresan llamadas de tigo. Se realiza llamada de prueba y se corrobora lo indicado en el caso.`,
-     "s1C.8.1":`Se valida tipología y se evidencia que esta no aplica, ${templat2}`,
-     "s1C.8.2":`Novedades relacionadas con infrestructura no son gestionadas por el PUC, ${templat2}`
+     "s1B.2.2":`se valida cobertura y se evidencia que no cuenta con la misma, según la ubicación brinda en el caso.`,
+     "s1B.2.6":`Segun novedad presentada XxxNOVEDAD_PRESENTADAxxX. Se escala ya que la portabilidad es reciente.`,
+     "s1B.1.7":`se valida caso y se evidencia que no hay comprobante de pago adjunto de la transaccion realizada, ya que para continuar con la solicitud se requiere del mismo.`,
+     "s1C.4.2":`se valida el caso por intermitencia pero al consultar el IMEI se evidencia que se encuetra reportado con novedad de hurto/robo.`,
+     "s1C.1.1":`${templat1}.`,
+     "s1C.1.2":`${templat1}, la linea afectada en el caso no existe en la base de Wom. INFORMACION ERRADA por parte del area que escala.`,
+     "s1C.1.3":`${templat1}, ya que no se evidencia linea alterna, y para este tipo de solicitud se requiere de la misma.`,
+     "s1C.1.4":`${templat1}, la línea desde la cual le estan llamando es la misma linea afectada, no es posible realizar una llamada al mismo numero.`,
+     "s1C.1.5":`${templat1}, no hay ubicación precisa para validar cobertura.`,
+     "s1C.1.6":`${templat1} y una descripción completa y precisa del problema que el usuario esta experimentando.`,
+     "s1C.3.1":`Se valida compatibilidad 4G y se evidencia que el equipo no es compatible.`,
+     "s1C.3.2":`se valida compatibilidad 4G y se evidencia que el equipo no es compatible.`,
+     "s1C.3.3":`se realiza validación sobre compatibilidad 4G de la linea en cuestion y se evidencia que este no es compatible con todas o algunas de las bandas 4G.`,
+     "s1C.3.4":`se realiza validación sobre compatibilidad 4G de la linea en cuestion y se evidencia que este no es compatible con todas o algunas de las bandas 4G.`,
+     "s1C.1.7":`${templat1}. ademas se debe registrar el proceso de soporte realizado en primer nivel.`,
+     "s1C.1.8":`${templat1}. no hay nombre de contacto efectivo al cual contactar.`,
+     "s1C.4.1":`se valida si esta activa la linea indicada en el caso como afectada y se evidencia que tiene bloqueo en Ekia.`,
+     "s1C.4.3":`se valida el caso ya que usuario no puede navegar, se validan billeteras y se evidencia que tiene agotado los recursos.`,
+     "s1C.5.1":`No hay convenio con números cortos.`,
+     "s1C.5.2":`No hay convenio con números del Grupo Aval.`,
+     "s1C.5.3":`No hay convenio con números de Falabella.`,
+     "s1C.8.1":`Se valida tipología y se evidencia que esta no aplica.`,
+     "s1C.8.2":`Novedades relacionadas con infrestructura no son gestionadas por el PUC.`
     };
   }
 //-----------------------------------------------------
