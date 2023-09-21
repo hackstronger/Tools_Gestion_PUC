@@ -68,7 +68,6 @@ select1.addEventListener("change", selectOption1);
       select2.innerHTML += '<option value="s1B.1.5">Sin cobertura</option>';
       select2.innerHTML += '<option value="s1B.1.6">Incompatibilidad (IMEI)</option>';
       select2.innerHTML += '<option value="s1B.1.7">Sin comprobante</option>';
-
     } else if (select1.value === 's1A.2') { //select 1 opcion 2
       select2.style.display = 'inline-block';
       select2.innerHTML += '<option value="s1B.2.1">Notas Incompletas</option>'; //select 2 opcion 1
@@ -105,7 +104,7 @@ select2.addEventListener("change", selectOption2);
       select3.style.display = 'inline-block'; 
       select3.innerHTML += '<option value="s1C.3.1">Dispositivo</option>';
       select3.innerHTML += '<option value="s1C.3.3">Bandas</option>';
-    }else if (select2.value === 's1B.2.4') {
+    } else if (select2.value === 's1B.2.4') {
       select3.style.display = 'inline-block';// option bloqueo
       select3.innerHTML += '<option value="s1C.4.1">Unidireccional</option>';
       select3.innerHTML += '<option value="s1C.4.2">IMEI</option>';
@@ -116,8 +115,8 @@ select2.addEventListener("change", selectOption2);
       select3.innerHTML += '<option value="s1C.5.2">Grupo Aval</option>';
       select3.innerHTML += '<option value="s1C.5.3">Falabella</option>';
     } else if (select2.value === 's1B.2.6') {
-    SelectSpan1.style.display = 'inline-block';
-    SelectSpan1.innerHTML = `<label for="NovedPresent"Novedad: </label>
+    	SelectSpan1.style.display = 'inline-block';
+    	SelectSpan1.innerHTML = `<label for="NovedPresent"Novedad: </label>
       <input type="text" id="NovedPresent" placeholder="Novedad presentada">
       <button type="button" id="clearNoved">Borrar</button>`;
   	} else if (select2.value === 's1B.2.8') {
@@ -131,18 +130,33 @@ select2.addEventListener("change", selectOption2);
   	} else if (select2.value === 's1B.1.2') {
     	SelectSpan1.style.display = 'block';
       SelectSpan1.innerHTML = `
-          <select id="selectPrueba">
+          <select id="selectContact">
           	 <option value="selec1" selected>Contacto</option>
              <option value="selec2">Caida</option>
              <option value="selec3">Muda</option>
           </select>
-          <label for="S3checkbox1">Restablecimiento de redes</label>
-          <input type="checkbox" id="S3checkbox1">
+          <label for="novedPresent2">Novedad Presentada</label>
+      		<input type="text" id="novedPresent2" placeholder="Novedad Presentada" required minlength="4" maxlength="72" size="15"> <button type="button" id="clearButtonNoved">Borrar</button>
           <label for="S3checkbox2">Escaneo de redes</label>
           <input type="checkbox" id="S3checkbox2"><br>
-          <textarea id="textArea3" rows="2" cols="42"></textarea>
+          <textarea id="textArea3" rows="2" cols="46"></textarea>
           <button type="button" id="clearButtonCont">Borrar</button>
         `;
+        // Agregar el evento click al botón dentro de la función
+        const novedPresent2 = document.querySelector('#novedPresent2'); 
+        const clearButtonNoved = document.querySelector('#clearButtonNoved'); //Numero de placa 
+        clearButtonNoved.addEventListener('click', () => {
+        novedPresent2.value = ''; // Borrar el texto del input text
+        });
+        
+        // Agregar el evento al select option
+        const selectContact = document.querySelector('#selectContact'); 
+        //const clearButtonNoved = document.querySelector('#clearButtonNoved'); //Numero de placa 
+        selectContact.addEventListener('change', () => {
+        	if (selectContact.value === 'selec2') {	
+         	alert("lo logro y sirve como quiere") 
+          }
+        });  
   	} 
     //else if (select2.value === 's1B.1.4') { //Consumos Seleccionado
     	//selectOpt2.selectedIndex = 2;
@@ -179,7 +193,7 @@ selectOpt1.addEventListener("change", selectOpt1Fun);
           <input type="checkbox" id="S2checkbox4">
           <label for="S2checkbox5">Configuración de Roaming</label>
           <input type="checkbox" id="S2checkbox5">
-          <label for="checkbox6">Desactivación llamadas volte</label>
+          <label for="checkbox6">Configuración llamadas VoLTE</label>
           <input type="checkbox" id="S2checkbox6"><br>          
           <label for="checkbox7">Prueba cruzada</label>
           <input type="checkbox" id="S2checkbox7"> 
@@ -187,7 +201,7 @@ selectOpt1.addEventListener("change", selectOpt1Fun);
           <input type="checkbox" id="S2checkbox8">
           <label for="checkbox9">Novedad solucionada</label>
           <input type="checkbox" id="S2checkbox9"><br>
-          <textarea id="textArea2" rows="2" cols="42"></textarea>
+          <textarea id="textAreaProc" rows="2" cols="42"></textarea>
           <button type="button" id="clearButtonProc">Borrar</button>
         `;
 
@@ -196,7 +210,7 @@ selectOpt1.addEventListener("change", selectOpt1Fun);
        // const textArea2 = document.getElementById('textArea2');
 
         clearButtonProc.addEventListener('click', () => {
-          textArea2.value = '';
+          textAreaProc.value = '';
           checkboxes.forEach(checkbox => {
             checkbox.checked = false;
             checkbox.disabled = false;
@@ -210,7 +224,7 @@ selectOpt1.addEventListener("change", selectOpt1Fun);
         checkboxes.forEach(checkbox => {
           checkbox.addEventListener('change', () => {
              const selectedValues = checkboxes.filter(checkbox => checkbox.checked).map(checkbox => checkbox.previousElementSibling.textContent);
-          textArea2.value = selectedValues.join(', '); // Cambiar el separador según tus necesidades
+          textAreaProc.value = selectedValues.join(', '); // Cambiar el separador según tus necesidades
           });
         });
         
@@ -229,7 +243,7 @@ selectOpt1.addEventListener("change", selectOpt1Fun);
            		checkbox.disabled = true;
           });
           n.disabled = true;
-          textArea2.value = textArea2Txt;
+          textAreaProc.value = textArea2Txt;
         }
         
         function checkboxUndisable(n) {
@@ -237,7 +251,7 @@ selectOpt1.addEventListener("change", selectOpt1Fun);
            		checkbox.disabled = false;
           });	
           n.disabled = false;
-          textArea2.value = "";
+          textAreaProc.value = "";
         }
       } 
   };  
@@ -273,7 +287,8 @@ function varTextField(propiedad) {
     textInput5: (typeof textField5 === 'undefined') ? "(Fecha)" : textField5.value,
     textInput6: (typeof numeCase === 'undefined') ? "No avaliable numeCase" : numeCase.value,
     checkbox1: (typeof checkbox1 === 'undefined') ? "No avaliable checkbox1" : checkbox1.checked,
-    namePlaque: (typeof namePlaque === 'undefined') ? "No avaliable namePlaque" : namePlaque.value
+    namePlaque: (typeof namePlaque === 'undefined') ? "No avaliable namePlaque" : namePlaque.value,
+    textAreaProc: (typeof textAreaProc === 'undefined') ? "No avaliable textArea2" : textAreaProc.value
 	};
   var valor = inputs[propiedad];
   return valor; // Devolver el valor
@@ -900,11 +915,12 @@ function getCustomTexts() {
     var textInput6 = varTextField('textInput6');  // Numero de caso
     var checkbox1 = varTextField('checkbox1');  // Checkbox Buzon de voz
     var namePlaque = varTextField('namePlaque'); //Numero de placa 
+    let textAreaProc = varTextField('textAreaProc'); //Textarea 2, Proceso realizado
     
     var checkBox1 =  checkbox1 === true ? `Se deja buzón de voz` : `No permite dejar buzón de voz`;// Validacion celda vacia
     var namePlaqueS =  namePlaque === "" ? `(numero de placa)` : namePlaque; // Validacion celda vacia
     let paqueSplit = namePlaqueS.split("\t"); //Numero de placa con tab
-		let textAreaProc = (typeof textArea2 === 'undefined') ? "No avaliable textArea2" : textArea2.value;   
+		   
    
     const templat1 =`Debido a la falta de información detallada en las notas proporcionadas, no pudimos completar el análisis y resolución del caso en el nivel de soporte al que fue escalado.
 Para poder brindar la mejor asistencia posible, se requieren detalles claros`; // primer aaprte de la plantilla
@@ -918,7 +934,7 @@ Para poder brindar la mejor asistencia posible, se requieren detalles claros`; /
       s3opc1: "n/a",
       s3opc2: textInput6 === "" ? `Sin número de caso` : textInput6, 
       "s1B.1.1": `se realizan las correspondientes marcaciones a la línea ${textInput4} el dia ${horaRestadaObj.fechActual}. Hora inicio ${horaRestadaObj.hrsRstdaFormtda}, hora fin ${horaRestadaObj.hrsOgralFormtda}. Sin contacto efectivo. ${checkBox1}.`, //namePlaque
-      "s1B.1.2":`se realiza comunicación a la línea ${textInput4}, este indica que la novedad reportada ya se encuentra  solucionada.`,
+      "s1B.1.2":`se realiza comunicación a la línea ${textInput4}, se indaga sobre la novedad presentada, (Novedad presentada).`, //${textInput4}
       "s1B.1.3":`Se realiza cierre del caso por novedad masiva del servicio con placa ${paqueSplit[0]} dia ${(typeof paqueSplit[1] === "undefined") ? "(Fecha)" : paqueSplit[1]} hora ${(typeof paqueSplit[2] === "undefined") ? "(Hora)" : paqueSplit[2]}.`, //Placa incidente
      "s1B.1.4":`se valida caso y se evidencian consumos desde antes y despues de haber generado el requerimiento.`,
      "s1B.1.5":`Se valida cobertura y se evidencia que no cuenta con la misma, según la ubicación brinda en el caso.`,
