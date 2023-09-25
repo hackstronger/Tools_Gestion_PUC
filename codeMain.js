@@ -55,9 +55,9 @@ select1.addEventListener("change", selectOption1);
   function selectOption1 () {
     select2.style.display = 'none';
     SelectSpan1.style.display = 'none';
-    select2.innerHTML = '<option value="">Seleccione una opción</option>';
+    select2.innerHTML = '<option value="">Select an option</option>';
     select3.style.display = 'none';
-    select3.innerHTML = '<option value="">Seleccione una opción</option>';
+    select3.innerHTML = '<option value="">Select an option</option>';
 
     if (select1.value === 's1A.1') { //select 1 opcion 1
       select2.style.display = 'inline-block';
@@ -84,7 +84,7 @@ select2.addEventListener("change", selectOption2);
   function selectOption2 () {
     select3.style.display = 'none';
     SelectSpan1.style.display = 'none';
-    select3.innerHTML = '<option value="">Seleccione una opción</option>';
+    select3.innerHTML = '<option value="">Select an option</option>';
 
     if (select2.value === 's1B.2.1') {
       select3.style.display = 'inline-block'; //Option Notas incompletas
@@ -119,6 +119,13 @@ select2.addEventListener("change", selectOption2);
     	SelectSpan1.innerHTML = `<label for="NovedPresent"Novedad: </label>
       <input type="text" id="NovedPresent" placeholder="Novedad presentada">
       <button type="button" id="clearNoved">Borrar</button>`;
+      // Agregar el evento click al botón dentro de la función
+      const NovedPresent = document.querySelector('#NovedPresent'); //textField Novedad
+      const clearNoved = document.querySelector('#clearNoved'); //Borra novedad presentada 
+      clearNoved.addEventListener('click', () => {
+      NovedPresent.value = ''; // Borrar el texto del input text
+      });
+      
   	} else if (select2.value === 's1B.2.8') {
       select3.style.display = 'inline-block';
       select3.innerHTML += '<option value="s1C.8.1">Tipologia No Aplica</option>';
@@ -139,24 +146,29 @@ select2.addEventListener("change", selectOption2);
       		<input type="text" id="novedPresent2" placeholder="Novedad Presentada" required minlength="4" maxlength="72" size="15"> <button type="button" id="clearButtonNoved">Borrar</button>
           <label for="S3checkbox2">Escaneo de redes</label>
           <input type="checkbox" id="S3checkbox2"><br>
-          <textarea id="textArea3" rows="2" cols="46"></textarea>
+          <textarea id="textAreaContac" rows="2" cols="46"></textarea>
           <button type="button" id="clearButtonCont">Borrar</button>
         `;
         // Agregar el evento click al botón dentro de la función
-        const novedPresent2 = document.querySelector('#novedPresent2'); 
-        const clearButtonNoved = document.querySelector('#clearButtonNoved'); //Numero de placa 
+        const novedPresent2 = document.querySelector('#novedPresent2'); //textField Novedad
+        const clearButtonNoved = document.querySelector('#clearButtonNoved'); //Borra novedad presentada 
         clearButtonNoved.addEventListener('click', () => {
         novedPresent2.value = ''; // Borrar el texto del input text
         });
-        
+        // Agregar el evento click al botón dentro de la función textarea contacto proceso
+        const textAreaContac = document.querySelector('#textAreaContac'); //textField Novedad
+        const clearButtonCont = document.querySelector('#clearButtonCont'); //Borra novedad presentada 
+        clearButtonCont.addEventListener('click', () => {
+        textAreaContac.value = ''; // Borrar el texto del input text
+        })        
         // Agregar el evento al select option
         const selectContact = document.querySelector('#selectContact'); 
         //const clearButtonNoved = document.querySelector('#clearButtonNoved'); //Numero de placa 
         selectContact.addEventListener('change', () => {
-        	if (selectContact.value === 'selec2') {	
-         	alert("lo logro y sirve como quiere") 
+        	if (selectContact.value === 'selec1') {	
+          //textAreaContac.value = 'Existe la variable';
           }
-        });  
+        }); 
   	} 
     //else if (select2.value === 's1B.1.4') { //Consumos Seleccionado
     	//selectOpt2.selectedIndex = 2;
@@ -288,7 +300,11 @@ function varTextField(propiedad) {
     textInput6: (typeof numeCase === 'undefined') ? "No avaliable numeCase" : numeCase.value,
     checkbox1: (typeof checkbox1 === 'undefined') ? "No avaliable checkbox1" : checkbox1.checked,
     namePlaque: (typeof namePlaque === 'undefined') ? "No avaliable namePlaque" : namePlaque.value,
-    textAreaProc: (typeof textAreaProc === 'undefined') ? "No avaliable textArea2" : textAreaProc.value
+    textAreaProc: (typeof textAreaProc === 'undefined') ? "No avaliable textAreaProc" : textAreaProc.value,
+    novedPresent2: (typeof novedPresent2 === 'undefined') ? "No avaliable novedPresent2" : novedPresent2.value,
+    NovedPresent: (typeof NovedPresent === 'undefined') ? "No avaliable NovedPresent" : NovedPresent.value,
+    textAreaContac: (typeof textAreaContac === 'undefined') ? "No avaliable textAreaProc" : textAreaContac.value,
+    selectContact: (typeof selectContact === 'undefined') ? "No avaliable selectContact" : selectContact.value
 	};
   var valor = inputs[propiedad];
   return valor; // Devolver el valor
@@ -906,22 +922,33 @@ function getSaludo() {
   return saludo;
 }
 // ---------------------------------
-
+function selectOptDinam() {
+      return {
+        selec1: `Por definir`,
+        selec2: `durante la indagación y validación cliente cuelga llamada o se cae.`,
+        selec3: `contestan pero no hay interacción. Cliente cuelga llamada o se cae.`
+      };
+    }
 // ---------------------------------
 function getCustomTexts() {
-		var horaRestadaObj = obtenerHoraRestada();
-    var textInput4 = varTextField('textInput4'); //Numero de contacto
-    var textInput5 = varTextField('textInput5'); // Fecha
-    var textInput6 = varTextField('textInput6');  // Numero de caso
-    var checkbox1 = varTextField('checkbox1');  // Checkbox Buzon de voz
-    var namePlaque = varTextField('namePlaque'); //Numero de placa 
+		let horaRestadaObj = obtenerHoraRestada(); //Funcion hora
+    let selectOptNov = selectOptDinam(); //Funcion select option dinamico
+    let textInput4 = varTextField('textInput4'); //Numero de contacto
+    let textInput5 = varTextField('textInput5'); // Fecha
+    let textInput6 = varTextField('textInput6');  // Numero de caso
+    let checkbox1 = varTextField('checkbox1');  // Checkbox Buzon de voz
+    let namePlaque = varTextField('namePlaque'); //Numero de placa 
     let textAreaProc = varTextField('textAreaProc'); //Textarea 2, Proceso realizado
+    let NovedPresent = varTextField('NovedPresent'); //Input text Noveddad presentada NovedPresent
+    let novedPresent2 = varTextField('novedPresent2'); //Input text Noveddad presentada textAreaProc
+    let textAreaContac = varTextField('textAreaContac'); //Input text Noveddad presentada textAreaContac
+    let selectContact = varTextField('selectContact'); //Input text Noveddad presentada selectContact
     
+    var selectOptText = selectOptNov[selectContact] || ""; //Select option Contacto
     var checkBox1 =  checkbox1 === true ? `Se deja buzón de voz` : `No permite dejar buzón de voz`;// Validacion celda vacia
     var namePlaqueS =  namePlaque === "" ? `(numero de placa)` : namePlaque; // Validacion celda vacia
     let paqueSplit = namePlaqueS.split("\t"); //Numero de placa con tab
 		   
-   
     const templat1 =`Debido a la falta de información detallada en las notas proporcionadas, no pudimos completar el análisis y resolución del caso en el nivel de soporte al que fue escalado.
 Para poder brindar la mejor asistencia posible, se requieren detalles claros`; // primer aaprte de la plantilla
     const templat2 =`no pudimos completar el análisis y resolución del caso en el nivel de soporte al que fue escalado`; //segunda parte de la plantilla
@@ -933,13 +960,13 @@ Para poder brindar la mejor asistencia posible, se requieren detalles claros`; /
       s2opc3: "Si",
       s3opc1: "n/a",
       s3opc2: textInput6 === "" ? `Sin número de caso` : textInput6, 
-      "s1B.1.1": `se realizan las correspondientes marcaciones a la línea ${textInput4} el dia ${horaRestadaObj.fechActual}. Hora inicio ${horaRestadaObj.hrsRstdaFormtda}, hora fin ${horaRestadaObj.hrsOgralFormtda}. Sin contacto efectivo. ${checkBox1}.`, //namePlaque
-      "s1B.1.2":`se realiza comunicación a la línea ${textInput4}, se indaga sobre la novedad presentada, (Novedad presentada).`, //${textInput4}
+      "s1B.1.1": `se realizan las correspondientes marcaciones a la línea ${textInput4} el dia ${horaRestadaObj.fechActual}. Hora inicio ${horaRestadaObj.hrsRstdaFormtda}, hora fin ${horaRestadaObj.hrsOgralFormtda}. Sin contacto efectivo. ${checkBox1}.`, 
+      "s1B.1.2":`se realiza comunicación a la línea ${textInput4}, se indaga sobre la novedad presentada, ${novedPresent2 === "" ? `(Novedad Presentada)` : novedPresent2}. ${selectOptText}${textAreaContac}`, //Novedad presenta (Contacto) 
       "s1B.1.3":`Se realiza cierre del caso por novedad masiva del servicio con placa ${paqueSplit[0]} dia ${(typeof paqueSplit[1] === "undefined") ? "(Fecha)" : paqueSplit[1]} hora ${(typeof paqueSplit[2] === "undefined") ? "(Hora)" : paqueSplit[2]}.`, //Placa incidente
      "s1B.1.4":`se valida caso y se evidencian consumos desde antes y despues de haber generado el requerimiento.`,
      "s1B.1.5":`Se valida cobertura y se evidencia que no cuenta con la misma, según la ubicación brinda en el caso.`,
      "s1B.2.2":`se valida cobertura y se evidencia que no cuenta con la misma, según la ubicación brinda en el caso.`,
-     "s1B.2.6":`Segun novedad presentada XxxNOVEDAD_PRESENTADAxxX. Se escala ya que la portabilidad es reciente.`,
+     "s1B.2.6":`Segun novedad presentada ${NovedPresent === "" ? `(Novedad Presentada)` : NovedPresent}. Se escala para su validación.`, //Novedad porta
      "s1B.1.7":`se valida caso y se evidencia que no hay comprobante de pago adjunto de la transaccion realizada, ya que para continuar con la solicitud se requiere del mismo.`,
      "s1C.4.2":`se valida el caso por intermitencia pero al consultar el IMEI se evidencia que se encuetra reportado con novedad de hurto/robo.`,
      "s1C.1.1":`${templat1}.`,
