@@ -87,7 +87,8 @@
                   </select>
                   <button id="seleccionar">Select All</button>
                   <button id="deseleccionar">Deselect All</button>
-                  <button id="ocultar">Hide</button>
+                  <button id="ocultar">Selected</button>
+                  <button id="mostrar">Deselected</button>
           </div><!-- wrap -->  
 
           <div class="wrap">        
@@ -113,8 +114,8 @@
                       </select>
                       <span id="SelectSpan1" style="display:none"></span>
                       <br>
-                      <label for="select2A">Proceso realizado:</label>
-                      <select id="select2A">
+                      <label for="select2A">Process carried out:</label>
+                      <select id="select2A" disabled>
                         <option value="s2A.1">Ninguno</option>
                         <option value="s2A.2">Proceso</option>
                       </select>
@@ -124,15 +125,15 @@
                       <span id="spanOpt2" style="display:none"></span>
                       
                       <br>
-                      <label for="selectOpt2">Servicio funcional SI/NO:</label>
-                      <select id="selectOpt2">
+                      <label for="selectOpt2">Functional service YES/NO:</label>
+                      <select id="selectOpt2" disabled>
                         <option value="s2opc1">n/a</option>
                         <option value="s2opc2">No</option>
                         <option value="s2opc3">Si</option>
                       </select>
                       <br>
-                      <label for="selectOpt3">Escalamiento:</label>
-                      <select id="selectOpt3">
+                      <label for="selectOpt3">Escalation:</label>
+                      <select id="selectOpt3" disabled>
                         <option value="s3opc1">No aplica</option>
                         <option value="s3opc2">Escalamiento</option>
                       </select>
@@ -147,7 +148,8 @@
                 <h2>Closing template</h2>
                 <textarea id="textArea"></textarea>
                 <button type="button" id="copy">Copy</button> <button  type="reset" id="delet">Delet</button>
-              </div><!-- form-grande -->   
+              </div><!-- form-grande --> 
+              <button type="button" id="resetAll">Reset All</button>
     </div><!-- tab1Content -->
 
     <div class="ContentTap" id="tab2Content"><!-- tab2Content -->
