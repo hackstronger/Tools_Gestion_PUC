@@ -136,11 +136,14 @@ select2.addEventListener("change", selectOption2);
       <input type="checkbox" id="checkbox1" checked>`;
   	} else if (select2.value === 's1B.1.2') {
     	SelectSpan1.style.display = 'block';
+      select2A.disabled = false;
       SelectSpan1.innerHTML = `
           <select id="selectContact">
           	 <option value="selec1" selected>Contacto</option>
              <option value="selec2">Caida</option>
              <option value="selec3">Muda</option>
+          </select>
+          <select id="selectContact2" style="display:none">
           </select>
           <label for="novedPresent2">Novedad Presentada</label>
       		<input type="text" id="novedPresent2" placeholder="Novedad Presentada" required minlength="4" maxlength="72" size="15"> <button type="button" id="clearButtonNoved">Borrar</button>
@@ -163,17 +166,22 @@ select2.addEventListener("change", selectOption2);
         })        
         // Agregar el evento al select option
         const selectContact = document.querySelector('#selectContact'); 
+        const selectContact2 = document.querySelector('#selectContact2'); 
         //const clearButtonNoved = document.querySelector('#clearButtonNoved'); //Numero de placa 
+        //Evento chenge select Option 1
         selectContact.addEventListener('change', () => {
-        	if (selectContact.value === 'selec1') {	
+        	if (selectContact.value === 'selec1') {
+         	 selectContact2.style.display = 'inline-block';
+     			 selectContact2.innerHTML += '<option value="selectOptT.1">Programada</option>';
+  			   selectContact2.innerHTML += '<option value="selectOptT.2">Muda</option>';
           //textAreaContac.value = 'Existe la variable';
           }
         }); 
-  	} 
+  	 
     //else if (select2.value === 's1B.1.4') { //Consumos Seleccionado
     	//selectOpt2.selectedIndex = 2;
   	//} 
-    	else if (select2.value === 's1B.1.3') { //No. Placa 
+    } else if (select2.value === 's1B.1.3') { //No. Placa 
     	SelectSpan1.style.display = 'inline-block';
     	SelectSpan1.innerHTML = `<label for="namePlaque">No. Placa:</label>
       <input type="text" id="namePlaque" placeholder="No. de placa" required minlength="4" maxlength="72" size="10">
@@ -197,15 +205,15 @@ selectOpt1.addEventListener("change", selectOpt1Fun);
         spanOpt2.innerHTML = `
           <label for="S2checkbox1">Restablecimiento de redes</label>
           <input type="checkbox" id="S2checkbox1">
-          <label for="S2checkbox2">Escaneo de redes</label>
+          <label for="S2checkbox2">Configuración de Roaming</label>
           <input type="checkbox" id="S2checkbox2">
-          <label for="S2checkbox3">Configuración de APN</label>
+          <label for="S2checkbox3">Configuración llamadas VoLTE</label>
           <input type="checkbox" id="S2checkbox3"><br>
-          <label for="S2checkbox4">Configuración de Roaming</label>
+          <label for="S2checkbox4">Configuración de APN</label>
           <input type="checkbox" id="S2checkbox4">
-          <label for="S2checkbox5">Configuración de Roaming</label>
+          <label for="S2checkbox5">Escaneo de redes</label>
           <input type="checkbox" id="S2checkbox5">
-          <label for="checkbox6">Configuración llamadas VoLTE</label>
+          <label for="checkbox6">Reinicio de equipo</label>
           <input type="checkbox" id="S2checkbox6"><br>          
           <label for="checkbox7">Prueba cruzada</label>
           <input type="checkbox" id="S2checkbox7"> 
@@ -512,15 +520,14 @@ inputFile.onclick = function cargarArchivo() {
   lector.readAsText(archivo, "UTF-8");
 };
 
-// --------------- Cambio Boton mostrar ---------------
+// --------------- Cambio Boton Selected ---------------
 document.getElementById("ocultar").addEventListener('click', changeText);
 
 function changeText() {
   var button = document.getElementById("ocultar");
-  	button.innerHTML = (button.innerHTML === "Ocultar") ? "Mostrar" : "Ocultar";
-  	(button.innerHTML === "Mostrar") ? hideUncheckedRows() : showAllRows();
+  	button.innerHTML = (button.innerHTML === "Selected") ? "Show" : "Selected";
+  	(button.innerHTML === "Show") ? hideUncheckedRows() : showAllRows();
 }
-
 
 function hideUncheckedRows() {
   var checkboxes = document.getElementsByClassName("checkbox");
@@ -551,7 +558,27 @@ function countChecked() {
   }
   countCheck.innerHTML = count;
 }
+// --------------- Cambio Boton Deselected ---------------
+document.getElementById("mostrar").addEventListener('click', changeTextD);
+
+function changeTextD() {
+  var button = document.getElementById("mostrar");
+  	button.innerHTML = (button.innerHTML === "Deselected") ? "Show" : "Deselected";
+  	(button.innerHTML === "Show") ? hideCheckedRows() : showAllRows();
+}
+
+function hideCheckedRows() {
+  var checkboxes = document.getElementsByClassName("checkbox");
+  for (var i = 0; i < checkboxes.length; i++) {
+    var checkbox = checkboxes[i];
+    var row = checkbox.parentNode.parentNode;
+    if (checkbox.checked) {
+      row.style.display = "none";
+    }
+  }
+}
 //-----------------------------------------------------
+
 
 //------------------ Select Color ---------------------
 function colorChecked() {
@@ -843,24 +870,32 @@ delet.onclick = () => {
   document.getElementById("textArea").value = "";
 };
 
+//borrador general
+var resetAll = document.getElementById("resetAll");
+resetAll.onclick = () => {
+	resetTemplate();
+  document.getElementById("textArea").value = "";
+};
 
 //Reset Select Option Plantilla
-var btnReset = document.getElementById("btnReset");
-btnReset.onclick = () => {
-  //document.getElementById("textArea").value = "";
-  select1.selectedIndex = 0; //Select Plantilla
-  select2.style.display = 'none'; //Option 2
-  select2.selectedIndex = 0;
-  select3.style.display = 'none'; //Option 3
-  select3.selectedIndex = 0;
-  selectOpt1.selectedIndex = 0; //Select proceso realizado
-  selectOpt1A.style.display = 'none';
-  selectOpt2.selectedIndex = 0; //Select Escalamiento
-  selectOpt3.selectedIndex = 0; //Select Servicio funcional
-  spanOpt3.style.display = 'none'; //Nu mero de caso Span
-  SelectSpan1.style.display = 'none'; //checkbox Span
-  spanOpt2.style.display = 'none'; //checkbox Proceso
-};
+document.getElementById("btnReset").addEventListener('click', resetTemplate); 
+  function resetTemplate() {
+    select1.selectedIndex = 0; //Select Plantilla
+    select2.style.display = 'none'; //Option 2
+    select2.selectedIndex = 0;
+    select3.style.display = 'none'; //Option 3
+    select3.selectedIndex = 0;
+    selectOpt1.selectedIndex = 0; //Select proceso realizado
+    selectOpt1A.style.display = 'none';
+    selectOpt2.selectedIndex = 0; //Select Escalamiento
+    selectOpt3.selectedIndex = 0; //Select Servicio funcional
+    spanOpt3.style.display = 'none'; //Nu mero de caso Span
+    SelectSpan1.style.display = 'none'; //checkbox Span
+    spanOpt2.style.display = 'none'; //checkbox Proceso
+    select2A.disabled = true; //Disabled Procces carried out
+    selectOpt2.disabled = true; //Disabled functional service
+    selectOpt3.disabled = true; //Disabled escalation
+  };
 //-----------------------------------------------------
 
 //--------------- CopyToClipboard ---------------------
@@ -922,9 +957,11 @@ function getSaludo() {
   return saludo;
 }
 // ---------------------------------
+
+// Select option contacto 
 function selectOptDinam() {
       return {
-        selec1: `Por definir`,
+        selec1: `Descripcion novedad`,
         selec2: `durante la indagación y validación cliente cuelga llamada o se cae.`,
         selec3: `contestan pero no hay interacción. Cliente cuelga llamada o se cae.`
       };
@@ -960,8 +997,8 @@ Para poder brindar la mejor asistencia posible, se requieren detalles claros`; /
       s2opc3: "Si",
       s3opc1: "n/a",
       s3opc2: textInput6 === "" ? `Sin número de caso` : textInput6, 
-      "s1B.1.1": `se realizan las correspondientes marcaciones a la línea ${textInput4} el dia ${horaRestadaObj.fechActual}. Hora inicio ${horaRestadaObj.hrsRstdaFormtda}, hora fin ${horaRestadaObj.hrsOgralFormtda}. Sin contacto efectivo. ${checkBox1}.`, 
-      "s1B.1.2":`se realiza comunicación a la línea ${textInput4}, se indaga sobre la novedad presentada, ${novedPresent2 === "" ? `(Novedad Presentada)` : novedPresent2}. ${selectOptText}${textAreaContac}`, //Novedad presenta (Contacto) 
+      "s1B.1.1": `Se realizan las correspondientes marcaciones a la línea ${textInput4} el dia ${horaRestadaObj.fechActual}. Hora inicio ${horaRestadaObj.hrsRstdaFormtda}, hora fin ${horaRestadaObj.hrsOgralFormtda}. Sin contacto efectivo. ${checkBox1}.`,
+      "s1B.1.2":`Se realiza comunicación a la línea ${textInput4} el dia ${horaRestadaObj.fechActual}, se indaga sobre la novedad presentada, ${novedPresent2}.${selectOptText}${textAreaContac}.`, //Novedad presenta (Contacto) 
       "s1B.1.3":`Se realiza cierre del caso por novedad masiva del servicio con placa ${paqueSplit[0]} dia ${(typeof paqueSplit[1] === "undefined") ? "(Fecha)" : paqueSplit[1]} hora ${(typeof paqueSplit[2] === "undefined") ? "(Hora)" : paqueSplit[2]}.`, //Placa incidente
      "s1B.1.4":`se valida caso y se evidencian consumos desde antes y despues de haber generado el requerimiento.`,
      "s1B.1.5":`Se valida cobertura y se evidencia que no cuenta con la misma, según la ubicación brinda en el caso.`,
