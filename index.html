@@ -21,17 +21,20 @@
   <div class="ContentTap" id="tab0Content"><!-- ContentTap -->
       <div class="wrapper">
           <div class="wrap left">
-                <form>
+              <div class="inputForm">
                   <div id="inputForm"></div>
-                  <button type="reset">Clear Textfield</button>
-                </form>
+                  <button id="updData">Update Cell</button>
+                  <button id="resetBtn">Clear Textfield</button>
+              </div>  
+              <div class="inputForm">  
                 <button id="genInp">Generate Input</button>
                 <button id="delDemo">Clear Inputs</button>
-                <br><br>
-                <button id="updData">Update Cell</button>
+              </div>  
+              <div class="inputForm"> 
                 <button type="button" class="btn btn-danger" id="agreFil">Add Row</button>
                 <button type="button" class="btn btn-danger" id="erasFil">Delete Last Row</button>
                 <button type="button" class="btn btn-danger" id="erasSelec">Delete Selection</button>
+              </div>  
           </div><!-- wrap -->
       
      <!--     <div class="wrap">
@@ -55,7 +58,7 @@
                   <option value="VOZ">Voz</option>
                 </select>
                 <br><br>
-                <label for="textFieldBSC">BSC Ticket No.</label>
+                <label for="textFieldBSC">SRC Ticket No.</label>
                 <input type="text" id="textFieldBSC" placeholder="Search text...">
                 <button id="reset">Restore</button>
                 <div id="reposDiv"></div>
@@ -72,7 +75,7 @@
 
                       <button id="loadTable">Load Table</button>
                       <button id="exportTableToCSV">Export To CSV</button>
-                      <button id="erasTabl">Clear tabla</button>
+                      <button id="erasTabl">Clear table</button>
           </div><!-- wrap -->
 
           <div class="wrap">
