@@ -48,13 +48,13 @@
 .wrap.left {
   flex-basis: 65%;
 }
-/*
+
 #inputForm {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom:7px;
-  border-bottom: 1px solid #ccc;
-}*/
+  /*margin-bottom:7px;
+  border-bottom: 1px solid #ccc;*/
+}
 .inputForm {
   margin-bottom: 5px;
   padding:2px;
