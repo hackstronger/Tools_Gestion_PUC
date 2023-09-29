@@ -691,7 +691,6 @@ function doSearch() {
         break;
       }
     }
-
     if (divContieneTexto) {
       divs[i].style.display = 'block';
     } else {
@@ -747,7 +746,7 @@ genInp.onclick = function() {
   var inputsHTML = "";
   for (let i = 1; i < headers.length; i++) { 
     inputsHTML += `<div class="textField"><label for="textField${i}">${i}. ${headers[i].innerText}:</label>
-    <input type="text" id="textField${i}" placeholder="${headers[i].innerText}"/></div>`;
+    <input type="text" class="textFieldDel" id="textField${i}" placeholder="${headers[i].innerText}"/></div>`;
     eval(`const textField${i} = document.querySelector('#textField${i}');`); // Variables dinámicas
   }
   container.innerHTML = inputsHTML;
@@ -845,6 +844,14 @@ function btnSeleccionar() {
 //-----------------------------------------------------
 
 // -------------------- Borradores --------------------
+//Borrar textField 
+var resetBtn = document.getElementById("resetBtn");
+resetBtn.onclick = function () {
+  var inputs = document.querySelectorAll('.textFieldDel');
+    for (var i = 0; i < inputs.length; i++) {
+      inputs[i].value = "";
+    }
+}
 //Limpiar busqueda
 var delet = document.getElementById("borrar");
 delet.onclick = function() {
